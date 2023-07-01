@@ -1,3 +1,3 @@
-class Client < ApplicationRecord
+class School < ApplicationRecord
   validates :name, presence: true
 end
