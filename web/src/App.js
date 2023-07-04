@@ -2,7 +2,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Box from "@mui/material/Box";
 import "./App.css";
 import AppBar from "./components/AppBar";
-import SchoolList from "./components/SchoolList";
+import DistrictList from "./components/DistrictList";
 
 const client = new ApolloClient({
   uri: "http://127.0.0.1:3001/graphql",
@@ -14,7 +14,7 @@ const App = () => {
     <ApolloProvider client={client}>
         <Box sx={{ flexGrow: 1 }}>
           <AppBar />
-          <SchoolList />
+          <DistrictList />
         </Box>
     </ApolloProvider>
   )

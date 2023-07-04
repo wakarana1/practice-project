@@ -1,0 +1,79 @@
+type District {
+  createdAt: ISO8601DateTime!
+  id: ID!
+  name: String!
+  updatedAt: ISO8601DateTime!
+}
+
+type Household {
+  createdAt: ISO8601DateTime!
+  householdSize: Int!
+  id: ID!
+  incomeMax: Int!
+  incomeMin: Int!
+  tierId: Int
+  updatedAt: ISO8601DateTime!
+}
+
+"""
+An ISO 8601-encoded datetime
+"""
+scalar ISO8601DateTime
+
+type Mutation {
+  """
+  An example field added by the generator
+  """
+  testField: String!
+}
+
+type Query {
+  """
+  List of Districts
+  """
+  districts: [District!]!
+
+  """
+  List of Households by Tier ID
+  """
+  households(tierId: Int!): [Household!]
+
+  """
+  List of Tiers by District ID
+  """
+  tiers(districtId: Int!): [Tier!]!
+
+  """
+  List of TuitionCredits by Tier ID
+  """
+  tuitionCredits(tierId: Int!): [TuitionCredit!]
+}
+
+type Tier {
+  createdAt: ISO8601DateTime!
+  districtId: Int!
+
+  """
+  List of Household breakdowns, if any
+  """
+  households: [Household!]
+  id: ID!
+  name: String!
+
+  """
+  List of Tuition Credits, if any
+  """
+  tuitionCredits: [TuitionCredit!]
+  updatedAt: ISO8601DateTime!
+}
+
+type TuitionCredit {
+  createdAt: ISO8601DateTime!
+  extendedDayCredit: Int!
+  fullDayCredit: Int!
+  halfDayCredit: Int!
+  id: ID!
+  rating: Int!
+  tierId: Int
+  updatedAt: ISO8601DateTime!
+}

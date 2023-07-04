@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box";
 
-const School = (school) => {
+const District = (district) => {
   return (
     <Box
-      id={school.id}
+      id={district.id}
       sx={{
         display: "flex",
         alignItems: "center",
@@ -11,8 +11,8 @@ const School = (school) => {
         borderBottom: "1px solid #ccc",
       }}
     >
-      {school.name}
+      {district.name}
     </Box>
   )
 };
-export default School;
+export default District;

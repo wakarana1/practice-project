@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :school do
+  factory :district do
     name { Faker::Name.name }
   end
 end
