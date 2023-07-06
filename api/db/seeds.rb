@@ -8,8 +8,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # Districts
-district1 = District.create!(name: "#{Faker::Address.city} Unified School District")
-district2 = District.create!(name: "#{Faker::Address.city} Unified School District")
+district1 = District.create(name: "#{Faker::Address.city} Unified School District")
+district2 = District.create(name: "#{Faker::Address.city} Unified School District")
+
+# Centers
+Center.create(district: district1, name: "#{Faker::Address.city} Childcare Center", rating: 1)
+Center.create(district: district1, name: "#{Faker::Address.city} Childcare Center", rating: 2)
+Center.create(district: district1, name: "#{Faker::Address.city} Childcare Center", rating: 3)
+Center.create(district: district1, name: "#{Faker::Address.city} Childcare Center", rating: 4)
+Center.create(district: district1, name: "#{Faker::Address.city} Childcare Center", rating: 5)
 
 # Tiers for District 1
 t1_d1 = Tier.create(district: district1, name: 'Tier 1')
