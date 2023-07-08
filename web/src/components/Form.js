@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { TextField, Button, Stack, MenuItem } from '@mui/material';
+import { TextField, Button, Stack, MenuItem, styled } from '@mui/material';
 import { gql, useQuery } from "@apollo/client";
 import { Link, useNavigate } from "react-router-dom"
 
@@ -10,20 +10,14 @@ const GET_TUITION_OPTIONS = gql`
 `;
 
 const Form = ({handleClose}) => {
-  const [household, setHousehold] = useState(0)
-  const [income, setIncome] = useState(0)
-  const [tuitionOption, setTuitionOption] = useState('')
+  const [household, setHousehold] = useState(2);
+  const [income, setIncome] = useState(0);
+  const [tuitionOption, setTuitionOption] = useState('');
   const navigate = useNavigate();
   const { loading, error, data } = useQuery(GET_TUITION_OPTIONS);
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
   const tuitionOptions = data?.tuitionOptions || [];
-
-  function checkInput() {
-    if(household < 2) return true;
-    if(tuitionOption === '') return true;
-    return false;
-  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -33,16 +27,16 @@ const Form = ({handleClose}) => {
 
   return (
     <>
-      <h2>Register Form</h2>
+      <h2>Find Centers</h2>
       <form onSubmit={handleSubmit} action={<Link to="/centers" />}>
-        <Stack spacing={2} direction="row">
+        <Stack spacing={2} direction="row" sx={{margin: "10px"}}>
           <TextField
             type="number"
             variant='outlined'
             color='secondary'
             label="Household Size"
             InputProps={{
-              inputProps: { min: 0 }
+              inputProps: { min: 2 }
             }}
             onChange={e => setHousehold(e.target.value)}
             value={household}
@@ -63,7 +57,7 @@ const Form = ({handleClose}) => {
             required
           />
         </Stack>
-        <Stack>
+        <Stack sx={{margin: "10px"}}>
           <TextField
             select
             label="Select"
@@ -81,9 +75,9 @@ const Form = ({handleClose}) => {
             ))}
           </TextField>
         </Stack>
-        <Stack direction="row" spacing={2} justifyContent="flex-end">
+        <Stack direction="row" spacing={2} justifyContent="flex-end" sx={{margin: "10px"}}>
           <Button variant="outlined" color="secondary" type="close" onClick={handleClose}>Cancel</Button>
-          <Button variant="contained" color="primary" type="submit" onClick={handleClose} disabled={checkInput()}>Register</Button>
+          <Button variant="contained" color="primary" type="submit">Search</Button>
         </Stack>
       </form>
     </>
