@@ -3,6 +3,7 @@ import { gql, useQuery } from "@apollo/client";
 import * as React from "react";
 import Center from "./Center";
 import Stack from "@mui/material/Stack";
+import Paper from "@mui/material/Paper";
 
 const GET_CENTERS = gql`
   query getCenters {
@@ -54,24 +55,26 @@ const CenterList = () => {
   }, {} );
 
   return (
-    <Stack
-      container
-      direction="column"
-      spacing={2}
-      sx={{
-        margin: "auto",
-        maxWidth: 500,
-        flexGrow: 1,
-      }}
-    >
-      {centers && centers.map((center) => (
-        <Center
-          center={center}
-          prices={ratingPrice}
+    <Paper elevation={0} sx={{margin: '30px'}}>
+      <Stack
+        container
+        direction="column"
+        spacing={2}
+        sx={{
+          margin: "auto",
+          maxWidth: 500,
+          flexGrow: 1,
+        }}
+      >
+        {centers && centers.map((center) => (
+          <Center
+            center={center}
+            prices={ratingPrice}
 
-        />
-      ))}
-    </Stack>
+          />
+        ))}
+      </Stack>
+    </Paper>
   );
 
 };
