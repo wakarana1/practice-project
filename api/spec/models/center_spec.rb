@@ -12,30 +12,34 @@ RSpec.describe Center, type: :model do
     let!(:center) { create(:center) }
     it 'correctly breaks down string into useable info' do
       time      = '0/06:00-11:00'
-      # time_list = '0/06:00-11:00, 0/13:00-19:59'
-
-      # time_hash = [
-      #   {
-      #     day: 0,
-      #     open: 600,
-      #     closed: 1100
-      #   },
-      #   {
-        #     day: 0,
-        #     open: 1300,
-      #     closed: 1959
-      #   }
-      # ]
 
       time_hash =
+        [{
+          day: 0,
+          open: 600,
+          closed: 1100
+        }]
+
+
+      expect(Center.parse_date(time)).to eq(time_hash)
+    end
+    it 'correctly breaks down multiple time slots' do
+      time_list = '0/06:00-11:00, 0/13:00-19:59'
+
+      time_hash = [
         {
           day: 0,
           open: 600,
           closed: 1100
+        },
+        {
+            day: 0,
+            open: 1300,
+          closed: 1959
         }
+      ]
 
-
-      expect(Center.parse_date(time)).to eq(time_hash)
+      expect(Center.parse_date(time_list)).to eq(time_hash)
     end
     # it 'parses incorrect data into a useable format' do
     #   time      = '-1/-'
