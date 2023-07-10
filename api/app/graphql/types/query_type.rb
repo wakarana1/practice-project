@@ -54,12 +54,19 @@ module Types
 
     def tuition_credits_through_household(district_id:, household_size:, income:)
       tier = Tier.includes(:households, :tuition_credits).where(district_id: district_id).find do |tier|
-        household         = household_size > 8 ? tier.households.find_by(household_size: 8) : tier.households.find_by(household_size: household_size)
-        oversize_increase = household_size > 8 ? tier.oversize_increase : 0
-        increased_income  = oversize_increase * (household_size - 8)
-        income_min        = household.income_min == 0 ? 0 : household.income_min + increased_income
-        income_max        = household.income_max == 0 ? 0 : household.income_max + increased_income
-        income <= income_max && income >= income_min
+        if household_size > 8
+          household         = tier.households.find_by(household_size: 8)
+          oversize_increase = tier.oversize_increase
+          increased_income  = oversize_increase * (household_size - 8)
+          income_min        = household.income_min == 0 ? 0 : household.income_min + increased_income
+          income_max        = household.income_max == 0 ? Float::INFINITY : household.income_max + increased_income
+        else
+          household         = tier.households.find_by(household_size: household_size)
+          income_min        = household.income_min
+          income_max        = household.income_max == 0 ? Float::INFINITY : household.income_max
+        end
+
+        income.in?(income_min..income_max)
       end
       tier&.tuition_credits
     end

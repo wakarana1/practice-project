@@ -73,11 +73,11 @@ RSpec.describe 'tuition_credit query' do
     end
 
     it 'finds related tuitionCredits with over 8 in household' do
-      create(:household, tier: tier, household_size: 8, income_min: 0, income_max: 46_330)
+      create(:household, tier: tier, household_size: 8, income_min: 185_320, income_max: 0)
 
       district_id = district.id
       household_size = 10
-      income = 14070
+      income = 223080
 
       query = <<~GQL
         query tuitionCreditsThroughHousehold {
