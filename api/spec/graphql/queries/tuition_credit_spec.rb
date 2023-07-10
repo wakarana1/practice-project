@@ -38,7 +38,7 @@ RSpec.describe 'tuition_credit query' do
   end
 
   describe 'Lists TuitionCredits by Household Info' do
-    it 'finds related tuitionCredits' do
+    it 'finds related tuitionCredits with under 8 in household' do
       household = create(:household, :two, tier: tier)
 
       district_id = district.id
@@ -69,7 +69,40 @@ RSpec.describe 'tuition_credit query' do
       end
 
       result = TuitionApiSchema.execute(query)
-      binding.pry
+      expect(result.dig('data', 'tuitionCreditsThroughHousehold')).to eq(tuition_credits_hash)
+    end
+
+    it 'finds related tuitionCredits with over 8 in household' do
+      household = create(:household, tier: tier, household_size: 8, income_min: 0, income_max: 46_330)
+
+      district_id = district.id
+      household_size = 10
+      income = 14070
+
+      query = <<~GQL
+        query tuitionCreditsThroughHousehold {
+          tuitionCreditsThroughHousehold(districtId: #{district_id}, householdSize: #{household_size}, income: #{income}) {
+            id
+            rating
+            fullDayCredit
+            halfDayCredit
+            extendedDayCredit
+          }
+        }
+      GQL
+
+      tuition_credits = [tuition_credit1, tuition_credit2, tuition_credit3]
+      tuition_credits_hash = tuition_credits.map do |tuition_credit|
+        {
+          'id' => tuition_credit.id.to_s,
+          'rating' => tuition_credit.rating,
+          'fullDayCredit' => tuition_credit.full_day_credit,
+          'halfDayCredit' => tuition_credit.half_day_credit,
+          'extendedDayCredit' => tuition_credit.extended_day_credit,
+        }
+      end
+
+      result = TuitionApiSchema.execute(query)
       expect(result.dig('data', 'tuitionCreditsThroughHousehold')).to eq(tuition_credits_hash)
     end
 

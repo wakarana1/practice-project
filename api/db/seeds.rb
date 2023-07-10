@@ -65,7 +65,10 @@ TuitionCredit.create!(tier: t1_d2, rating: 1, full_day_credit: 626, half_day_cre
 TuitionCredit.create!(tier: t1_d2, rating: 2, full_day_credit: 697, half_day_credit: 349, extended_day_credit: 802)
 TuitionCredit.create!(tier: t1_d2, rating: 3, full_day_credit: 804, half_day_credit: 402, extended_day_credit: 925)
 TuitionCredit.create!(tier: t1_d2, rating: 4, full_day_credit: 849, half_day_credit: 425, extended_day_credit: 976)
+TuitionCredit.create!(tier: t1_d2, rating: 5, full_day_credit: 937, half_day_credit: 468, extended_day_credit: 1077)
 # TuitionCredit for District 2 Tier 2
 TuitionCredit.create!(tier: t2_d2, rating: 1,	full_day_credit: 563, half_day_credit: 282, extended_day_credit: 648)
 TuitionCredit.create!(tier: t2_d2, rating: 2, full_day_credit: 627, half_day_credit: 314, extended_day_credit: 722)
 TuitionCredit.create!(tier: t2_d2, rating: 3, full_day_credit: 724, half_day_credit: 362, extended_day_credit: 833)
+TuitionCredit.create!(tier: t2_d2, rating: 4, full_day_credit: 764, half_day_credit: 382, extended_day_credit: 879)
+TuitionCredit.create!(tier: t2_d2, rating: 5, full_day_credit: 843, half_day_credit: 421, extended_day_credit: 969)

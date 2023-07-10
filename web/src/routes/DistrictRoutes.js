@@ -7,7 +7,7 @@
 //     <>
 //       <Routes>
 //         <Route index element={<DistrictList />} />
-//         <Route path="/districts/:id/centers" element={<CenterList />} />
+//         <Route path="centers" element={<CenterList />} />
 //       </Routes>
 //     </>
 //   )

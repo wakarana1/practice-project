@@ -27,12 +27,12 @@ FactoryBot.define do
       income_min { 0 }
     end
     trait :seven do
-      household_size { 6 }
+      household_size { 7 }
       income_max { 41_910 }
       income_min { 0 }
     end
     trait :eight do
-      household_size { 6 }
+      household_size { 8 }
       income_max { 46_330 }
       income_min { 0 }
     end

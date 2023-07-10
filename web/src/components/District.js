@@ -1,7 +1,12 @@
 // import Box from "@mui/material/Box";
 // import { Link } from "react-router-dom";
+// import { useMatch } from 'react-router-dom';
+
 
 // const District = (district) => {
+//   // const { path } = useMatch();
+//   // console.log(path);
+
 //   return (
 //     <Box
 //       id={district.id}

@@ -57,7 +57,6 @@ const CenterList = () => {
   return (
     <Paper elevation={0} sx={{margin: '30px'}}>
       <Stack
-        container
         direction="column"
         spacing={2}
         sx={{
@@ -68,6 +67,7 @@ const CenterList = () => {
       >
         {centers && centers.map((center) => (
           <Center
+            key={center.id}
             center={center}
             prices={ratingPrice}
 

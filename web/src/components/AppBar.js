@@ -32,9 +32,6 @@ const TuitionAppBar = () => {
           <Link className="nav-link" to="/"><Button variant="text" sx={{ color: "white" }}>Tuition Finder</Button></Link>
           </Typography>
         <Box sx={{ display: 'block' }}>
-          {/* <Link className="nav-link" to="/centers"><Button variant="contained">Childcare Centers</Button></Link> */}
-          {/* <Link className="nav-link" to="/centers">
-            </Link> */}
           <Button variant="contained" onClick={handleOpen} >Childcare Centers</Button>
           <ModalDialog open={open} handleClose={handleClose} />
         </Box>
