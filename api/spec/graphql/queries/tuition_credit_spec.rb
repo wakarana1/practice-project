@@ -38,9 +38,9 @@ RSpec.describe 'tuition_credit query' do
   end
 
   describe 'Lists TuitionCredits by Household Info' do
-    it 'finds related tuitionCredits with under 8 in household' do
-      household = create(:household, :two, tier: tier)
+    let!(:household) { create(:household, :two, tier: tier) }
 
+    it 'finds related tuitionCredits with under 8 in household' do
       district_id = district.id
       household_size = household.household_size
       income = 12000
@@ -73,7 +73,7 @@ RSpec.describe 'tuition_credit query' do
     end
 
     it 'finds related tuitionCredits with over 8 in household' do
-      household = create(:household, tier: tier, household_size: 8, income_min: 0, income_max: 46_330)
+      create(:household, tier: tier, household_size: 8, income_min: 0, income_max: 46_330)
 
       district_id = district.id
       household_size = 10
@@ -108,12 +108,12 @@ RSpec.describe 'tuition_credit query' do
 
     it 'ignores tuitionCredits in other tiers' do
       tier2 = create(:tier, district: district)
-      household = create(:household, :two, tier: tier2)
+      household2 = create(:household, tier: tier2, household_size: 2, income_min: 18_311, income_max: 33_874)
       tier2_tuition_credit = TuitionCredit.create(tier: tier2, rating: 3, full_day_credit: 804, half_day_credit: 402, extended_day_credit: 925)
 
       district_id = district.id
-      household_size = household.household_size
-      income = 12000
+      household_size = household2.household_size
+      income = 19000
 
       query = <<~GQL
         query tuitionCreditsThroughHousehold {
